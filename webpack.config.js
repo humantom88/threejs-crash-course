@@ -1,17 +1,18 @@
-const path = require('path');
-
 module.exports = {
+    mode: 'development',
+    devtool: 'inline-source-map',
     entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, 'public'),
-        publicPath: 'static',
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: 'static'
     },
-    mode: 'development',
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.ts', '.tsx', '.js']
+    },
     module: {
-        rules: [{
-            test: /\.ts$/,
-            use: 'awesome-typescript-loader'
-        }]
+        rules: [
+            { test: /\.tsx?$/, loader: 'ts-loader' }
+        ]
     }
 };
