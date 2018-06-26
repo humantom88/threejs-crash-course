@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import {Cube} from './components/primitives/cube';
-import {OrbitControls, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import {OrbitControls, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {Crate} from './components/crates/crate';
 
 
 const OrbitControlsJS = require('three-orbit-controls')(THREE);
@@ -50,18 +50,14 @@ export class App {
     }
 
     private initSceneObjects () {
-        const cube = new Cube(1, 1, 1);
+        const cube = new Crate(1, 1, 1);
         this.sceneObjects.push(cube);
         this.scene.add(cube.getMesh());
     }
 
     // Logic goes here
     private update () {
-        this.sceneObjects.forEach((object: any) => {
-            if (object.animate) {
-                object.animate();
-            }
-        })
+
     }
 
     // App runs here

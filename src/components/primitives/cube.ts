@@ -7,9 +7,9 @@ import {
 } from "three";
 
 export class Cube {
-    private geometry: Geometry;
-    private material: Material;
-    private mesh: Mesh;
+    protected geometry: Geometry;
+    protected material: Material | Material[];
+    protected mesh: Mesh;
 
     constructor(width: number,
                 height: number,
@@ -17,7 +17,7 @@ export class Cube {
                 color: number = 0xFFFFFF,
                 wireframe: boolean = false) {
         this.geometry = new BoxGeometry(width, height, depth);
-        this.material = new MeshBasicMaterial({color, wireframe});
+        this.material = new MeshBasicMaterial({ color, wireframe });
         this.mesh = new Mesh(this.geometry, this.material);
     }
 
@@ -25,13 +25,8 @@ export class Cube {
         return this.mesh;
     }
 
-    public animate () {
-        this.rotateAnimation()
-    }
-
-    rotateAnimation () {
-        this.mesh.rotation.x += 0.01;
-        this.mesh.rotation.y += 0.01;
+    setMaterial (material: Material | Material[]) {
+        this.material = material;
     }
 
 }
