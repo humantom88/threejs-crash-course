@@ -1,5 +1,6 @@
 import {Cube} from "../primitives/cube";
-import {DoubleSide, Material, Mesh, MeshBasicMaterial, TextureLoader} from "three";
+import {DoubleSide, Material, Mesh, MeshLambertMaterial, TextureLoader} from "three";
+import {CRATE_BASIC} from "../../textures";
 
 export class Crate extends Cube {
 
@@ -12,15 +13,15 @@ export class Crate extends Cube {
     ) {
         super(width, height, depth, color, wireframe);
 
-        const texture = new TextureLoader().load('textures/crate.jpg');
+        const texture = new TextureLoader().load(CRATE_BASIC);
 
         const crateMaterial: Material[] = [
-            new MeshBasicMaterial({ map: texture, side: DoubleSide }), // RIGHT
-            new MeshBasicMaterial({ map: texture, side: DoubleSide }), // LEFT
-            new MeshBasicMaterial({ map: texture, side: DoubleSide }), // TOP
-            new MeshBasicMaterial({ map: texture, side: DoubleSide }), // BOTTOM
-            new MeshBasicMaterial({ map: texture, side: DoubleSide }), // FRONT
-            new MeshBasicMaterial({ map: texture, side: DoubleSide })  // BACK
+            new MeshLambertMaterial({ map: texture, side: DoubleSide }), // RIGHT
+            new MeshLambertMaterial({ map: texture, side: DoubleSide }), // LEFT
+            new MeshLambertMaterial({ map: texture, side: DoubleSide }), // TOP
+            new MeshLambertMaterial({ map: texture, side: DoubleSide }), // BOTTOM
+            new MeshLambertMaterial({ map: texture, side: DoubleSide }), // FRONT
+            new MeshLambertMaterial({ map: texture, side: DoubleSide })  // BACK
         ];
 
         this.material = crateMaterial;

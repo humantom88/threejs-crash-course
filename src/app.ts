@@ -1,6 +1,10 @@
 import * as THREE from 'three';
-import {OrbitControls, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {AmbientLight, Cache, OrbitControls, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {Crate} from './components/crates/crate';
+import add = Cache.add;
+import {Floor} from "./components/floors/floor";
+import {Wall} from "./components/walls/wall";
+import {Ceiling} from "./components/ceilings/ceiling";
 
 
 const OrbitControlsJS = require('three-orbit-controls')(THREE);
@@ -19,6 +23,14 @@ export class App {
         this.initResize();
         this.initControls();
         this.initSceneObjects();
+        this.initLights();
+    }
+
+    private initLights () {
+        const color = 0xFFFFFF;
+        const intensity = 0.5;
+        const ambientLight = new AmbientLight(0xFFFFFF, 0.5);
+        this.scene.add(ambientLight);
     }
 
     private initResize () {
@@ -53,6 +65,28 @@ export class App {
         const cube = new Crate(1, 1, 1);
         this.sceneObjects.push(cube);
         this.scene.add(cube.getMesh());
+
+        const floor = new Floor();
+        floor.getMesh().position.y = -5;
+        this.sceneObjects.push(floor);
+        this.scene.add(floor.getMesh());
+
+        const leftWall = new Wall();
+        leftWall.getMesh().position.x = -5;
+        this.sceneObjects.push(leftWall);
+        this.scene.add(leftWall.getMesh());
+
+
+        const rightWall = new Wall();
+        rightWall.getMesh().position.x = 5;
+        this.sceneObjects.push(rightWall);
+        this.scene.add(rightWall.getMesh());
+
+
+        const ceeling = new Ceiling();
+        ceeling.getMesh().position.y = 5;
+        this.sceneObjects.push(ceeling);
+        this.scene.add(ceeling.getMesh());
     }
 
     // Logic goes here
